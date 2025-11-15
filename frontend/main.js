@@ -97,14 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function fetchPosts(){ 
-    fetch('http://127.0.0.1:5000/posts')
+    fetch('http://127.0.0.1:3000/posts')
       .then(r=>r.json())
       .then(renderPosts)
       .catch(e=>console.error('posts fetch',e)); 
   }
 
   function fetchResources(){
-    fetch('http://127.0.0.1:5000/resources').then(r=>r.json()).then(data=>{
+    fetch('http://127.0.0.1:3000/resources').then(r=>r.json()).then(data=>{
       resourcesLayer.clearLayers();
       data.forEach(r=>{
         const icon = getResourceIcon(r.type);
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Decrement clicks when marker is clicked
         m.on('click', function(){
           if (r.id) {
-            fetch(`http://127.0.0.1:5000/resources/${r.id}/click`, {method:'POST'})
+            fetch(`http://127.0.0.1:3000/resources/${r.id}/click`, {method:'POST'})
               .then(res=>res.json())
               .then(resp=>{ 
                 if (!resp.exists){ 
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
       username: username
     };
     
-    fetch('http://127.0.0.1:5000/posts',{
+    fetch('http://127.0.0.1:3000/posts',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify(payload)
@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
   resourceForm.addEventListener('submit', e=>{
     e.preventDefault(); const payload = { name:(resName.value||'').trim(), type:(resType.value||'').trim(), notes:(resNotes.value||'').trim(), lat:parseFloat(resLat.value), lon:parseFloat(resLon.value) };
     if (!payload.name || !isFinite(payload.lat) || !isFinite(payload.lon)){ resourceMsg.textContent='Name, latitude and longitude are required and must be valid numbers.'; resourceMsg.style.color='var(--danger)'; return; }
-    fetch('http://127.0.0.1:5000/resources',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(r=>r.json()).then(()=>{ resourceMsg.textContent='Resource marked — thanks!'; resourceMsg.style.color='inherit'; resName.value=''; resType.value=''; resNotes.value=''; resLat.value=''; resLon.value=''; fetchResources(); }).catch(e=>{ resourceMsg.textContent='Failed to mark resource'; resourceMsg.style.color='var(--danger)'; console.error(e); });
+    fetch('http://127.0.0.1:3000/resources',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(r=>r.json()).then(()=>{ resourceMsg.textContent='Resource marked — thanks!'; resourceMsg.style.color='inherit'; resName.value=''; resType.value=''; resNotes.value=''; resLat.value=''; resLon.value=''; fetchResources(); }).catch(e=>{ resourceMsg.textContent='Failed to mark resource'; resourceMsg.style.color='var(--danger)'; console.error(e); });
   });
 
   // Natural language search
@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const {latitude, longitude} = pos.coords;
       const query = searchQuery.value.trim();
       if (!query) return;
-      fetch('http://127.0.0.1:5000/search', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({query, lat:latitude, lon:longitude})})
+      fetch('http://127.0.0.1:3000/search', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({query, lat:latitude, lon:longitude})})
         .then(r=>r.json())
         .then(data=>{
           searchResults.innerHTML='';
