@@ -31,7 +31,6 @@ CORS(app)
 def hello():
     return "Hello, World!"
 
-
 @app.route('/posts', methods=['GET'])
 def posts_list():
     return jsonify(models.get_posts())
