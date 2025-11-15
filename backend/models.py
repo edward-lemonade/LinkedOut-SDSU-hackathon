@@ -48,31 +48,29 @@ def get_resources():
 
 def add_resource(resource: dict):
     resources = _load('initial_resources.json')
-    # Initialize clicks tracking
+    
     resource['clicks_remaining'] = resource.get('clicks_limit', 10)  # default 10 clicks if not specified
-    resource['id'] = str(len(resources))  # Simple ID for tracking
+    resource['id'] = str(len(resources)) 
     resources.append(resource)
     _save('initial_resources.json', resources)
 
 def click_resource(resource_id: str) -> bool:
-    """Returns True if resource still exists, False if it was removed due to no clicks remaining."""
     resources = _load('initial_resources.json')
     for resource in resources:
         if resource.get('id') == resource_id:
             clicks = resource.get('clicks_remaining', 0)
-            if clicks <= 1:  # Remove if this was the last click
+            if clicks <= 1:  
                 resources.remove(resource)
                 _save('initial_resources.json', resources)
                 return False
             resource['clicks_remaining'] = clicks - 1
             _save('initial_resources.json', resources)
             return True
-    return False  # Resource not found
+    return False  # resource not there
 
 
 def haversine_distance(lat1, lon1, lat2, lon2):
-    """Calculate distance between two coordinates in miles."""
-    R = 3959  # Earth radius in miles
+    R = 3959  
     phi1, phi2 = math.radians(lat1), math.radians(lat2)
     delta_lat = math.radians(lat2 - lat1)
     delta_lon = math.radians(lon2 - lon1)
@@ -91,14 +89,14 @@ def find_nearest_resource(user_lat: float, user_lon: float, resource_type: str =
     if not resources:
         return None
     
-    # Filter by type if specified
+    # filter by type
     if resource_type:
         resources = [r for r in resources if r.get('type', '').lower() == resource_type.lower()]
     
     if not resources:
         return None
     
-    # Calculate distances and find nearest
+    #find neare distance
     nearest = None
     min_distance = float('inf')
     

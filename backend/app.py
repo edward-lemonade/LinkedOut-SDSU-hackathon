@@ -8,7 +8,7 @@ import os
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import models
 
-#down the the line if we want LLM capabilities
+#down the the line if we want LLMs
 try:
     import openai
     LLM_AVAILABLE = True
@@ -54,7 +54,7 @@ def posts_create():
     models.add_post(post)
     return jsonify(post), 201
 
-
+#get endpoints
 @app.route('/resources')
 def resources_list():
     return jsonify(models.get_resources())
@@ -84,7 +84,7 @@ def search_resources():
     query_lower = query.lower()
     resource_type = None
     
-    # Simple keyword matching
+    #keyword matching for rn but experiment with LLM
     if any(word in query_lower for word in ['water', 'drink', 'thirst', 'fountain']):
         resource_type = 'water'
     elif any(word in query_lower for word in ['food', 'eat', 'meal', 'hungry', 'lunch', 'dinner']):
@@ -105,7 +105,7 @@ def search_resources():
         else:
             return jsonify({'message': 'I didn\'t understand what you\'re looking for. Try asking for: water, food, shelter, jobs, or medical services.'}), 400
     
-    # Try to get address via reverse geocoding
+    #get address
     address = "Address unavailable"
     if GEOCODING_AVAILABLE:
         try:
