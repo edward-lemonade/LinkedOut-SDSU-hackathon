@@ -1,42 +1,72 @@
 [
   {
-    "name": "Water Fountain",
-    "type": "water",
-    "lat": 32.7157,
-    "lon": -117.1611,
-    "notes": "Open 24/7"
+    "name": "karthik",
+    "type": "other",
+    "notes": "bus stop here for UCSD transit",
+    "lat": 32.888016,
+    "lon": -117.242253,
+    "created_at": "2025-11-14T23:12:40.568086Z",
+    "clicks_remaining": 5,
+    "id": "1"
   },
   {
-    "name": "Shelter A",
-    "type": "sleep",
-    "lat": 32.7167,
-    "lon": -117.162,
-    "notes": "Limited capacity"
+    "name": "jonathon",
+    "type": "other",
+    "notes": "Bus stop here",
+    "lat": 32.878833,
+    "lon": -117.243927,
+    "created_at": "2025-11-14T23:23:37.324514Z",
+    "clicks_remaining": 5,
+    "id": "3"
   },
   {
-    "name": "karhtik",
-    "type": "water",
-    "notes": "",
-    "lat": 32.719771,
-    "lon": -117.157517,
-    "created_at": "2025-11-10T05:21:42.079899Z"
-  },
-  {
-    "name": "darren watkins",
-    "type": "water",
-    "notes": "faucet here gives some good water ngl",
-    "lat": 32.889753,
-    "lon": -117.240815,
-    "created_at": "2025-11-10T05:25:52.858315Z"
-  },
-  {
-    "name": "asdfasdf",
+    "name": "karthik",
     "type": "food",
-    "notes": "",
-    "lat": 32.888153,
-    "lon": -117.242188,
-    "created_at": "2025-11-13T00:22:36.180044Z",
-    "clicks_remaining": 4,
+    "notes": "farmers market for nutrition foods (discounted)",
+    "lat": 32.878084,
+    "lon": -117.239571,
+    "created_at": "2025-11-14T23:24:40.041950Z",
+    "clicks_remaining": 1,
+    "id": "4"
+  },
+  {
+    "name": "Bus Stop",
+    "type": "other",
+    "notes": "bus stop here for north torrey pines",
+    "lat": 32.875083,
+    "lon": -117.24369,
+    "created_at": "2025-11-14T23:31:41.742001Z",
+    "clicks_remaining": 10,
+    "id": "4"
+  },
+  {
+    "name": "Church free food on sundays",
+    "type": "food",
+    "notes": "lutheran chuch gives out free food just enter main hall and politely ask",
+    "lat": 32.874579,
+    "lon": -117.244399,
+    "created_at": "2025-11-14T23:32:25.651295Z",
+    "clicks_remaining": 7,
+    "id": "5"
+  },
+  {
+    "name": "water refill",
+    "type": "water",
+    "notes": "water fountain with bottle station at ground level of seventh college",
+    "lat": 32.887968,
+    "lon": -117.241663,
+    "created_at": "2025-11-15T00:01:04.705792Z",
+    "clicks_remaining": 8,
+    "id": "6"
+  },
+  {
+    "name": "karthik - free church food",
+    "type": "food",
+    "notes": "free sunday church food",
+    "lat": 32.875111,
+    "lon": -117.244409,
+    "created_at": "2025-11-15T00:03:58.874619Z",
+    "clicks_remaining": 10,
     "id": "6"
   }
 ]

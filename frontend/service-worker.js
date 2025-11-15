@@ -6,7 +6,6 @@ const STATIC_ASSETS = [
   '/login.html',
   '/styles.css',
   '/main.js'
-  // Removed /favicon.ico since it doesn't exist
 ];
 
 self.addEventListener('install', (event) => {
@@ -14,7 +13,6 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        // Add assets one by one with error handling
         return Promise.allSettled(
           STATIC_ASSETS.map(url => 
             cache.add(url).catch(err => console.warn(`Failed to cache ${url}:`, err))
@@ -46,22 +44,21 @@ self.addEventListener('fetch', (event) => {
   if (url.pathname.startsWith('/resources') || url.pathname.startsWith('/posts') || url.pathname.startsWith('/search')) {
     event.respondWith(
       fetch(req).then(networkRes => {
-        // Put a copy in the api cache
+        
         const copy = networkRes.clone();
         caches.open(API_CACHE).then(cache => cache.put(req, copy));
         return networkRes;
       }).catch(() => {
-        // Fallback to cache if offline
+        
         return caches.match(req).then(cached => cached || new Response(JSON.stringify({error: 'offline'}), {headers: {'Content-Type': 'application/json'}}));
       })
     );
     return;
   }
 
-  // For navigation and static assets, do cache-first
+
   event.respondWith(
     caches.match(req).then(cached => cached || fetch(req).then(networkRes => {
-      // Optionally cache fetched assets from same-origin
       if (url.origin === location.origin) {
         caches.open(CACHE_NAME).then(cache => cache.put(req, networkRes.clone()));
       }

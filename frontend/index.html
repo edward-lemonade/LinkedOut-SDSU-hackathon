@@ -4,13 +4,11 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
         <title>LinkedOut</title>
-        <!-- Leaflet CSS (load first so our styles can override) -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-        <!-- Optional icons / fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
         <style>
 :root{
-	--bg:#c7e0ef;   /* 🔵 darker blue */
+	--bg:#c7e0ef;  
 	--card:#ffffff;
 	--muted:#6b7280;
 	--accent:#0077cc;
@@ -82,7 +80,6 @@ body{
 .header-user #userDisplay{color:#0f172a}
 .header-user .btn{padding:8px 14px;font-size:13px}
 
-/* Main layout: map and forum side by side */
 .main-content{
 	display:grid;
 	grid-template-columns:1fr 1fr;
@@ -93,7 +90,6 @@ body{
 	margin: 0 auto;
 }
 
-/* Map section */
 .map-section{
 	display:flex;
 	flex-direction:column;
@@ -140,7 +136,6 @@ body{
 .post-card{background:#fbfcfd;border:1px solid rgba(2,6,23,0.03);padding:12px;border-radius:8px;flex-shrink:0}
 .post-card .meta{font-size:12px;color:var(--muted);margin-bottom:6px}
 
-/* Auxiliary sections */
 .auxiliary-section{
 	display:grid;
 	grid-template-columns:1fr 1fr;
@@ -159,7 +154,7 @@ body{
 }
 .panel h2{margin:0 0 10px 0;font-size:16px;font-weight:600;color:#1e293b}
 
-/* Search form */
+
 .search-form{display:flex;flex-direction:column;gap:8px}
 .search-form input{padding:10px;border-radius:8px;border:1px solid rgba(15,23,42,0.08);background:linear-gradient(180deg, #fff, #fbfdff)}
 .search-results{margin-top:12px;max-height:200px;overflow-y:auto}
@@ -169,7 +164,6 @@ body{
 .search-result-card .result-actions{margin-top:8px;display:flex;gap:8px}
 .search-result-card .result-actions a{padding:6px 10px;border-radius:6px;background:var(--accent);color:white;text-decoration:none;font-size:12px}
 
-/* Resource form */
 .resource-form{display:flex;flex-direction:column;gap:8px}
 .resource-form input, .resource-form select{padding:10px;border-radius:8px;border:1px solid rgba(15,23,42,0.08);background:linear-gradient(180deg, #fff, #fbfdff)}
 .coords{display:flex;gap:8px}
@@ -177,21 +171,18 @@ body{
 .row{display:flex;gap:8px}
 .resource-msg{margin-top:8px;color:var(--muted);font-size:13px}
 
-/* Buttons */
 .btn{padding:8px 12px;border-radius:8px;border:1px solid rgba(15,23,42,0.06);background:white;cursor:pointer;font-size:14px;font-weight:500;transition:all 0.2s}
 .btn.primary{background:var(--accent);color:white;border-color:var(--accent)}
 .btn.secondary{background:#f1f5f9;color:#334155;border-color:#e2e8f0}
 .btn:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,0.1)}
 .btn:active{transform:translateY(0)}
 
-/* Popup actions */
 .resource-popup .popup-actions{margin-top:8px;display:flex;gap:8px;align-items:center}
 .resource-popup .directions{padding:6px 10px;border-radius:6px;background:var(--accent);color:white;text-decoration:none;font-size:13px}
 .resource-popup .print-btn{padding:6px 10px;border-radius:6px;background:#10b981;color:white;border:none;cursor:pointer;font-size:13px}
 
 .app-footer{padding:12px 0;color:var(--muted);font-size:13px;text-align:center}
 
-/* Responsive */
 @media (max-width: 1100px){
 	.main-content{grid-template-columns:1fr;}
 	.forum-panel{height:50vh}
@@ -211,7 +202,7 @@ body{
             <div class="header-content">
                 <div class="header-logo-section">
                     <img src="logo.png" alt="LinkedOut" class="header-logo" />
-                    <p class="tagline">Connect with resources. Anonymous messaging and quick resource finder.</p>
+                    <p class="tagline">Connect with resources. Anonymous messaging and quick resource finder for the San Diego unhoused.</p>
                 </div>
                 <div class="header-user">
                     <span id="userDisplay">Welcome!</span>
@@ -221,9 +212,8 @@ body{
         </div>
     </header>
 
-    <!-- Main Content: Map and Forum Side by Side -->
     <div class="main-content container">
-        <!-- Map Section -->
+    
         <section class="map-section">
             <div id="map" class="map"></div>
             <div id="mapHints" class="map-hints">
@@ -231,7 +221,6 @@ body{
             </div>
         </section>
 
-        <!-- Forum Section -->
         <section class="forum-section">
             <div class="forum-panel">
                 <h2>Community Forum</h2>
@@ -244,13 +233,12 @@ body{
         </section>
     </div>
 
-    <!-- Auxiliary Section: Mark Resource and Search -->
     <div class="auxiliary-section container">
-        <!-- Mark a Resource -->
+
         <div class="panel">
             <h2>Mark a Resource</h2>
             <form id="resourceForm" class="resource-form">
-                <input id="resName" placeholder="Resource name (required)" />
+                <input id="resName" placeholder="Subject/Username" />
                 <select id="resType">
                     <option value="">Select type...</option>
                     <option value="water">Water</option>
@@ -273,7 +261,7 @@ body{
             <div id="resourceMsg" class="resource-msg" aria-live="polite"></div>
         </div>
 
-        <!-- Ask for Help -->
+
         <div class="panel">
             <h2>Ask for Help</h2>
             <form id="searchForm" class="search-form">
@@ -288,11 +276,10 @@ body{
         <small>LinkedOut — A resource connection platform for the San Diego community.</small>
     </footer>
 
-    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="main.js"></script>
     <script>
-        // Register service worker for offline caching
+        
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/service-worker.js')

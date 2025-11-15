@@ -7,21 +7,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-    --bg: #f9fafb;
-    --card: #ffffff;
-    --muted: #8088a0;
-    --accent: #8d90f5;
-    --accent-600: #a3a0f7;
-    --danger: #ef5350;
-    --radius: 10px;
-}
-
+            --bg: #e8f4ff;          
+            --card: #ffffff;
+            --muted: #6b7b8c;
+            --accent: #4da3ff;      
+            --accent-600: #1f8bff;  
+            --danger: #e53935;
+            --radius: 10px;
+        }
 
         * { box-sizing: border-box; }
 
         body {
             font-family: 'Inter', -apple-system, system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            background: linear-gradient(135deg, #d6ecff 0%, #b4dcff 100%); /* new light-blue gradient */
             color: #0f172a;
             margin: 0;
             padding: 0;
@@ -42,7 +41,7 @@
             background: var(--card);
             border-radius: var(--radius);
             padding: 40px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
         }
 
         .login-header {
@@ -64,10 +63,6 @@
             margin: 0;
             font-size: 32px;
             font-weight: 700;
-            background: linear-gradient(90deg, #686aef, #6660e9);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             display: none; /* Hide text since we're using logo */
         }
 
@@ -142,13 +137,13 @@
         }
 
         .btn-primary {
-            background: linear-gradient(90deg, #6366f1, #4f46e5);
+            background: linear-gradient(90deg, #4da3ff, #1f8bff);
             color: white;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 6px 20px rgba(77, 163, 255, 0.3);
         }
 
         .btn-primary:active {
@@ -260,29 +255,19 @@
         const messageDiv = document.getElementById('message');
         const usernameInput = document.getElementById('username');
 
-        // Check if already logged in
         window.addEventListener('load', () => {
-            console.log('Checking for existing user...');
             const existingUser = localStorage.getItem('linkedoutUser');
-            console.log('Existing user data:', existingUser);
-            
             if (existingUser) {
-                console.log('User already logged in, redirecting...');
                 window.location.href = 'index.html';
             }
         });
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            console.log('Form submitted');
 
             const username = usernameInput.value.trim();
             const email = document.getElementById('email').value.trim();
             const agreed = document.getElementById('agreeTerms').checked;
-
-            console.log('Username:', username);
-            console.log('Email:', email);
-            console.log('Agreed:', agreed);
 
             if (!username) {
                 showMessage('Please enter a username', 'error');
@@ -294,7 +279,6 @@
                 return;
             }
 
-            // Store user session in localStorage
             const user = {
                 username: username,
                 email: email || 'anonymous@linkedout.local',
@@ -302,30 +286,19 @@
                 sessionId: 'sess_' + Math.random().toString(36).substr(2, 9)
             };
 
-            console.log('Saving user to localStorage:', user);
-            
             try {
                 localStorage.setItem('linkedoutUser', JSON.stringify(user));
-                console.log('User saved successfully');
-                
-                // Verify it was saved
-                const saved = localStorage.getItem('linkedoutUser');
-                console.log('Verification - saved data:', saved);
-                
                 showMessage('Welcome to LinkedOut! Redirecting...', 'success');
 
                 setTimeout(() => {
-                    console.log('Redirecting to index.html');
                     window.location.href = 'index.html';
                 }, 1500);
             } catch (error) {
-                console.error('Error saving to localStorage:', error);
                 showMessage('Error saving login. Please try again.', 'error');
             }
         });
 
         function showMessage(text, type) {
-            console.log('Showing message:', text, type);
             messageDiv.textContent = text;
             messageDiv.className = 'message ' + type;
             setTimeout(() => {
